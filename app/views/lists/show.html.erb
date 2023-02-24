@@ -1,0 +1,20 @@
+<div class="list-group-item">
+  <h1> Your list <strong><%= @list.name %></strong></h1>
+
+  <h2>Which include <%= @list.movies.count %> movies:</h2>
+  <% @list.movies.each do |movie|  %>
+    <p><%= movie.title %></p>
+    <p><%= movie.overview %></p>
+    <p><%= movie.rating %></p>
+    <img src="<%movie.poster_url%>" alt="<%movie.title%>">
+  <% end %>
+
+  <h2>Included in <%= @list.bookmarks.count %> bookmark:</h2>
+  <% @list.bookmarks.each do |bookmark|  %>
+    <p><%= bookmark.comment %>
+    <%= link_to "Delete this bookmark", list_path(bookmark),
+    data: {turbo_method: :delete, turbo_confirm: "Are you sure?"}%></p>
+  <% end %>
+
+<%= link_to 'add a bookmark', new_list_bookmark_path(@list), class: "btn btn-primary" %>
+</div>
