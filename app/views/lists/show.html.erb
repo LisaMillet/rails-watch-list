@@ -1,20 +1,23 @@
-<div class="list-group-item">
-  <h1> Your list <strong><%= @list.name %></strong></h1>
+<div class="banner" style="background-image: linear-gradient(rgba(0,0,0,0.4),rgba(0,0,0,0.4)), url(https://raw.githubusercontent.com/lewagon/fullstack-images/master/uikit/background.png);">
+  <div class="container">
+    <h1>Your list <strong><%= @list.name %></strong></h1>
+    <p>You have <%= @list.bookmarks.count %> movies in this list</p>
+    <%= link_to "add a bookmark", new_list_bookmark_path(@list), class: "btn btn-flat"%>
+  </div>
+</div>
 
-  <h2>Which include <%= @list.movies.count %> movies:</h2>
-  <% @list.movies.each do |movie|  %>
-    <p><%= movie.title %></p>
-    <p><%= movie.overview %></p>
-    <p><%= movie.rating %></p>
-    <img src="<%movie.poster_url%>" alt="<%movie.title%>">
-  <% end %>
-
-  <h2>Included in <%= @list.bookmarks.count %> bookmark:</h2>
+<div class="row align-items-center m-1">
   <% @list.bookmarks.each do |bookmark|  %>
-    <p><%= bookmark.comment %>
-    <%= link_to "Delete this bookmark", list_path(bookmark),
-    data: {turbo_method: :delete, turbo_confirm: "Are you sure?"}%></p>
+    <div class="card-trip col-3">
+      <img src="https://raw.githubusercontent.com/lewagon/fullstack-images/master/uikit/greece.jpg" />
+      <div class="card-trip-infos">
+        <div>
+          <h2><%= bookmark.comment %></h2>
+          <p>movie overview</p>
+        </div>
+        <h2 class="card-trip-pricing"><%= link_to "Delete this bookmark", list_path(bookmark),
+        data: {turbo_method: :delete, turbo_confirm: "Are you sure?"}%></h2>
+      </div>
+    </div>
   <% end %>
-
-<%= link_to 'add a bookmark', new_list_bookmark_path(@list), class: "btn btn-primary" %>
 </div>
